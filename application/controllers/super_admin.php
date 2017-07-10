@@ -2,6 +2,18 @@
 error_reporting(0); //mematikan error
 class Super_admin extends CI_Controller {
 
+
+	public function __construct()
+	{
+		parent::__construct();
+		if (!$this->session->userdata('nm_admin')) {
+			// $this->load->view('login_admin');
+			// exit;
+			redirect('ci_admin','refresh');
+		}
+	}
+
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -9,15 +21,15 @@ class Super_admin extends CI_Controller {
 	 * Website : www.dewakode.com
 	 */
 	public function index(){
-		if($this->session->userdata('nm_admin')){
+		// if($this->session->userdata('nm_admin')){
 			$data['nm_admin']=$this->session->userdata('nm_admin');
 			//$data['nm_login']	= $data;
 			//$d['bread'] 		= 'Home';
 			$data['content'] 		= 'welcome_superadmin';
 			$this->load->view('view_super_admin',$data);
-		}else{
-			$this->load->view('login_admin');
-		}
+		// }else{
+		// 	$this->load->view('login_admin');
+		// }
 		
 	}
 
